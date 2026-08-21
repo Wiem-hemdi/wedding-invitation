@@ -12,12 +12,35 @@
 </head>
 <body>
   <div id="entryOverlay" class="entry-overlay">
-    <div class="flower-frame" id="entryFlowers" aria-hidden="true"></div>
-    <div class="entry-card animate-in" style="--d:0">
-      <p class="entry-basmala">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
-      <p class="entry-names">Idriss <span>&amp;</span> Insaf</p>
-      <p class="entry-sub">Vous êtes cordialement invités</p>
-      <button type="button" id="openInvite" class="entry-btn pulse-cta">Ouvrir l'invitation ♪</button>
+    <div class="envelope-wrapper">
+      <div id="envelope" class="envelope">
+        <div class="envelope-flap"></div>
+        <div class="envelope-pocket"></div>
+        <div class="envelope-card">
+          <p class="entry-basmala">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+          <p class="entry-names">Idriss <span>&amp;</span> Insaf</p>
+          <p class="entry-sub">Vous êtes cordialement invités</p>
+          <button type="button" id="openInvite" class="entry-btn pulse-cta" style="pointer-events: none; opacity: 0.8;">Chargement...</button>
+        </div>
+        <div class="wax-seal" id="waxSeal">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 6 C22 4, 4 22, 6 50 C4 78, 22 96, 50 94 C78 96, 96 78, 94 50 C96 22, 78 4, 50 6 Z" fill="url(#waxGrad)" filter="url(#shadow)" />
+            <circle cx="50" cy="50" r="32" fill="none" stroke="#701212" stroke-width="1.5" opacity="0.5" />
+            <circle cx="50" cy="50" r="28" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.35" />
+            <path d="M50 36 C45 28, 30 28, 30 44 C30 60, 50 72, 50 72 C50 72, 70 60, 70 44 C70 28, 55 28, 50 36 Z" fill="#e6c280" opacity="0.95" />
+            <defs>
+              <radialGradient id="waxGrad" cx="40%" cy="40%" r="60%">
+                <stop offset="0%" stop-color="#cc3333" />
+                <stop offset="75%" stop-color="#8a0f0f" />
+                <stop offset="100%" stop-color="#540505" />
+              </radialGradient>
+              <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.4" />
+              </filter>
+            </defs>
+          </svg>
+        </div>
+      </div>
     </div>
   </div>
 

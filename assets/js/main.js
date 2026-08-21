@@ -253,14 +253,48 @@ document.addEventListener('DOMContentLoaded',function(){
     }
   }
 
-  openBtn.addEventListener('click', async function(){
-    overlay.classList.add('is-closed');
-    document.body.classList.add('invite-open');
-    await startMusic();
-    setTimeout(()=>{
-      try{ spawnConfettiBurst(W/2, H/4, 40); }catch(e){}
-    }, 400);
-  });
+  // Interactive envelope opening sequence
+  const envelope = document.getElementById('envelope');
+  if (envelope) {
+    envelope.addEventListener('click', async function(e) {
+      if (envelope.classList.contains('open')) return;
+      
+      // Step 1: Open the flap
+      envelope.classList.add('open');
+      
+      // Step 2: Extract the card
+      setTimeout(() => {
+        envelope.classList.add('extracted');
+      }, 550);
+      
+      // Step 3: Turn/flip the card, fade out overlay, & start the music
+      setTimeout(async () => {
+        envelope.classList.add('turned');
+        overlay.classList.add('is-closed');
+        await startMusic();
+      }, 1450);
+      
+      // Step 4: Finalize entrance & trigger welcoming confetti
+      setTimeout(() => {
+        document.body.classList.add('invite-open');
+        setTimeout(() => {
+          try { spawnConfettiBurst(W/2, H/4, 48); } catch(e) {}
+        }, 150);
+      }, 2150);
+    });
+  }
+
+  // Fallback for button listener (legacy support)
+  if (openBtn) {
+    openBtn.addEventListener('click', async function(){
+      overlay.classList.add('is-closed');
+      document.body.classList.add('invite-open');
+      await startMusic();
+      setTimeout(()=>{
+        try{ spawnConfettiBurst(W/2, H/4, 40); }catch(e){}
+      }, 400);
+    });
+  }
 
   musicToggle.addEventListener('click', async function(){
     if(bgMusic.paused){
