@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Idriss & Insaf — Mariage 20 Septembre 2026</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <header id="hero" class="section-hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <p class="basmala">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+      <p class="invitation">Les familles <strong>Manai</strong> &amp; <strong>Bellar</strong> ont l'honneur de vous inviter à célébrer l'union de leurs enfants</p>
+      <h1 class="names">Idriss <span class="amp">&amp;</span> Insaf</h1>
+      <p class="date">20 Septembre 2026 — Dynasty Kairouan</p>
+      <a class="cta" href="#rsvp">Confirmer ma présence</a>
+    </div>
+    <nav class="main-nav">
+      <a href="#story">Notre Histoire</a>
+      <a href="#gallery">Galerie</a>
+      <a href="#details">Détails</a>
+      <a href="#rsvp">RSVP</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="story" class="section">
+      <div class="container">
+        <h2>Notre Histoire</h2>
+        <div class="story-grid">
+          <figure class="story-photo">
+            <img src="assets/images/547917330_18366035626158053_2314096883542678175_n.jpg" alt="Idriss et Insaf" loading="lazy" />
+          </figure>
+          <div class="story-text">
+            <p class="lead">Deux destins qui se croisent, deux cœurs qui s'unissent. Idriss et Insaf vous invitent à partager ce moment unique, entourés de ceux qu'ils aiment.</p>
+            <p class="story-detail">Remplacez ce texte par votre propre histoire — votre rencontre, vos moments précieux, et ce qui vous a menés jusqu'à ce jour.</p>
+          </div>
+        </div>
+        <div class="countdown" aria-live="polite">
+          <div><span id="days">00</span><small>Jours</small></div>
+          <div><span id="hours">00</span><small>Heures</small></div>
+          <div><span id="minutes">00</span><small>Minutes</small></div>
+          <div><span id="seconds">00</span><small>Secondes</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="section section-alt">
+      <div class="container">
+        <h2>Galerie</h2>
+        <p class="section-intro">Quelques instants capturés avant le grand jour</p>
+        <div class="gallery" id="galleryGrid">
+          <img src="assets/images/545361446_18366035644158053_3193472444551215217_n.jpg" alt="Idriss et Insaf — séance photo" loading="lazy" />
+          <img src="assets/images/545364281_18366035623158053_9221160591835879011_n.jpg" alt="Idriss et Insaf — portrait" loading="lazy" />
+          <img src="assets/images/547668378_18366035653158053_8224662686307866995_n.jpg" alt="Idriss et Insaf — moment complice" loading="lazy" />
+          <img src="assets/images/547917330_18366035626158053_2314096883542678175_n.jpg" alt="Idriss et Insaf — étreinte" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <section id="details" class="section">
+      <div class="container">
+        <h2>Détails de l'Événement</h2>
+        <ul class="schedule">
+          <li><strong>Cérémonie</strong><span>17:00</span></li>
+          <li><strong>Vin d'honneur</strong><span>18:30</span></li>
+          <li><strong>Dîner</strong><span>20:00</span></li>
+        </ul>
+        <p class="venue-note">Adresse : Dynasty Kairouan — voir le plan d'accès ci-dessous</p>
+      </div>
+    </section>
+
+    <section id="rsvp" class="section section-alt">
+      <div class="container">
+        <h2>Confirmation de présence</h2>
+        <p class="section-intro">Merci de nous confirmer votre présence avant le 1<sup>er</sup> septembre 2026</p>
+        <form id="rsvpForm" class="rsvp-form">
+          <label>Nom complet<input name="name" type="text" required placeholder="Votre nom"></label>
+          <label>Email<input name="email" type="email" required placeholder="votre@email.com"></label>
+          <label>Nombre de personnes<select name="guests" required>
+            <option value="1">1 personne</option>
+            <option value="2">2 personnes</option>
+            <option value="3">3 personnes</option>
+            <option value="4">4 personnes</option>
+          </select></label>
+          <label>Message<textarea name="message" rows="3" placeholder="Un mot pour les mariés…"></textarea></label>
+          <button type="submit">Envoyer</button>
+        </form>
+        <div id="rsvpMsg" class="rsvp-message" hidden></div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <h2>Contact &amp; Plan d'accès</h2>
+        <div class="map">
+          <iframe src="https://www.google.com/maps?q=Dynasty+Kairouan&output=embed" loading="lazy" title="Localisation Dynasty Kairouan"></iframe>
+        </div>
+        <p class="contact-note">Pour toute question : <a href="mailto:wiem.hemdi@polytechnicien.tn">wiem.hemdi@polytechnicien.tn</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Idriss &amp; Insaf — Avec amour</p>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
