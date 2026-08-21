@@ -410,12 +410,11 @@ document.addEventListener('DOMContentLoaded',function(){
   setActiveNav('hero');
 
   // Scroll reveal + timeline stagger
-  const reveals = document.querySelectorAll('.section, .gallery img, .story-photo, .event-card, .contact-block, .countdown');
+  const reveals = document.querySelectorAll('.section, .gallery img, .story-photo, .event-card, .contact-block, .countdown, .timeline li');
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(ent=>{
       if(!ent.isIntersecting) return;
       ent.target.classList.add('visible');
-      ent.target.querySelectorAll('.timeline').forEach(tl => tl.classList.add('animate'));
     });
   },{threshold:0.1});
   reveals.forEach(r=>{
