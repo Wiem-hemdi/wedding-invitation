@@ -1,5 +1,47 @@
 // Main interactive behaviors: countdown, RSVP handling, gallery preview, particles, reveal on scroll
 document.addEventListener('DOMContentLoaded',function(){
+  // Background music
+  const overlay = document.getElementById('entryOverlay');
+  const openBtn = document.getElementById('openInvite');
+  const bgMusic = document.getElementById('bgMusic');
+  const musicToggle = document.getElementById('musicToggle');
+  bgMusic.volume = 0.35;
+
+  function setMusicUI(playing){
+    musicToggle.hidden = false;
+    musicToggle.classList.toggle('is-muted', !playing);
+    musicToggle.querySelector('.music-on').hidden = !playing;
+    musicToggle.querySelector('.music-off').hidden = playing;
+    musicToggle.setAttribute('aria-label', playing ? 'Couper la musique' : 'Activer la musique');
+  }
+
+  async function startMusic(){
+    try {
+      await bgMusic.play();
+      setMusicUI(true);
+    } catch {
+      setMusicUI(false);
+    }
+  }
+
+  openBtn.addEventListener('click', async function(){
+    overlay.classList.add('is-closed');
+    document.body.classList.add('invite-open');
+    await startMusic();
+    setTimeout(()=>{
+      try{ spawnConfettiBurst(W/2, H/4, 40); }catch(e){}
+    }, 400);
+  });
+
+  musicToggle.addEventListener('click', async function(){
+    if(bgMusic.paused){
+      await startMusic();
+    } else {
+      bgMusic.pause();
+      setMusicUI(false);
+    }
+  });
+
   // Countdown
   const target = new Date('2026-09-20T17:00:00'); // wedding date/time (local) - adjust as needed
   const daysEl = document.getElementById('days');
@@ -14,10 +56,21 @@ document.addEventListener('DOMContentLoaded',function(){
     const hours = Math.floor((diff / (1000*60*60)) % 24);
     const minutes = Math.floor((diff / (1000*60)) % 60);
     const seconds = Math.floor((diff / 1000) % 60);
+    const secStr = String(seconds).padStart(2,'0');
+    if(secsEl.textContent !== secStr){
+      secsEl.textContent = secStr;
+      const secBox = secsEl.closest('div');
+      if(secBox){
+        secBox.classList.remove('tick-pop');
+        void secBox.offsetWidth;
+        secBox.classList.add('tick-pop');
+      }
+    } else {
+      secsEl.textContent = secStr;
+    }
     daysEl.textContent = String(days).padStart(2,'0');
     hoursEl.textContent = String(hours).padStart(2,'0');
     minsEl.textContent = String(minutes).padStart(2,'0');
-    secsEl.textContent = String(seconds).padStart(2,'0');
   }
   updateCountdown();
   setInterval(updateCountdown,1000);
@@ -88,18 +141,37 @@ document.addEventListener('DOMContentLoaded',function(){
   sectionEls.forEach(s => navObserver.observe(s));
   setActiveNav('hero');
 
-  // Simple reveal on scroll
-  const reveals = document.querySelectorAll('.section, .gallery img, .story-photo, .event-card');
+  // Scroll reveal + timeline stagger
+  const reveals = document.querySelectorAll('.section, .gallery img, .story-photo, .event-card, .contact-block, .countdown');
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(ent=>{
-      if(ent.isIntersecting) ent.target.classList.add('visible');
+      if(!ent.isIntersecting) return;
+      ent.target.classList.add('visible');
+      ent.target.querySelectorAll('.timeline').forEach(tl => tl.classList.add('animate'));
     });
-  },{threshold:0.08});
-  reveals.forEach(r=>{r.classList.add('reveal');io.observe(r)});
+  },{threshold:0.1});
+  reveals.forEach(r=>{
+    r.classList.add('reveal');
+    if(r.closest('#contact')) r.classList.add('reveal-left');
+    io.observe(r);
+  });
 
-  // Hero names entrance
-  const namesEl = document.querySelector('.names');
-  if(namesEl) setTimeout(()=> namesEl.classList.add('visible'), 400);
+  // Hero parallax on scroll (background only — keeps kenBurns animation)
+  const heroBg = document.querySelector('.hero-bg');
+  const hero = document.getElementById('hero');
+  if(heroBg && hero){
+    let ticking = false;
+    function parallaxHero(){
+      const rect = hero.getBoundingClientRect();
+      const progress = Math.min(1, Math.max(0, -rect.top / rect.height));
+      heroBg.style.backgroundPosition = `center ${25 + progress * 10}%`;
+      ticking = false;
+    }
+    addEventListener('scroll', ()=>{
+      if(!ticking){ requestAnimationFrame(parallaxHero); ticking = true; }
+    }, {passive:true});
+    parallaxHero();
+  }
 
   // Gallery click -> open in new tab (simple preview)
   document.getElementById('galleryGrid').addEventListener('click',function(e){
@@ -110,17 +182,21 @@ document.addEventListener('DOMContentLoaded',function(){
 
   // Particles background (lightweight)
   const canvas = document.getElementById('particles');
+  const shell = document.querySelector('.app-shell');
   const ctx = canvas.getContext('2d');
-  let W = canvas.width = innerWidth;
-  let H = canvas.height = innerHeight;
+  let W, H;
   const particles = [];
   const confetti = [];
   function rand(min,max){return Math.random()*(max-min)+min}
+  function sizeCanvas(){
+    W = canvas.width = shell ? shell.offsetWidth : innerWidth;
+    H = canvas.height = shell ? shell.offsetHeight : innerHeight;
+  }
   function initParticles(){
     particles.length = 0;
-    const count = Math.round((W*H)/80000);
+    const count = Math.round((W*H)/70000);
     for(let i=0;i<count;i++){
-      particles.push({x:rand(0,W),y:rand(0,H),r:rand(0.6,2.2),vx:rand(-0.3,0.3),vy:rand(-0.1,0.1),alpha:rand(0.1,0.9)});
+      particles.push({x:rand(0,W),y:rand(0,H),r:rand(0.6,2.2),vx:rand(-0.35,0.35),vy:rand(-0.15,0.15),alpha:rand(0.15,0.7)});
     }
   }
   // confetti helper
@@ -135,8 +211,9 @@ document.addEventListener('DOMContentLoaded',function(){
       });
     }
   }
-  function onResize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;initParticles()}
+  function onResize(){ sizeCanvas(); initParticles(); }
   addEventListener('resize',onResize);
+  sizeCanvas();
   initParticles();
   function tick(){
     ctx.clearRect(0,0,W,H);
@@ -172,14 +249,25 @@ document.addEventListener('DOMContentLoaded',function(){
   }
   tick();
 
-  // spawn welcoming confetti on load (subtle)
-  setTimeout(()=> spawnConfettiBurst(W/2,H/4,32),650);
+  // spawn welcoming confetti on load (after invitation opened only — handled in openBtn)
 
-  // parallax: move particle field slightly on mouse
+  // parallax: move particles on touch/mouse
   let mx=0,my=0;
-  addEventListener('mousemove',e=>{mx=(e.clientX-W/2)/W; my=(e.clientY-H/2)/H});
+  addEventListener('mousemove',e=>{
+    if(!shell) return;
+    const r = shell.getBoundingClientRect();
+    mx=(e.clientX-r.left-W/2)/W;
+    my=(e.clientY-r.top-H/2)/H;
+  });
+  addEventListener('touchmove',e=>{
+    if(!shell || !e.touches[0]) return;
+    const r = shell.getBoundingClientRect();
+    const t = e.touches[0];
+    mx=(t.clientX-r.left-W/2)/W;
+    my=(t.clientY-r.top-H/2)/H;
+  },{passive:true});
   setInterval(()=>{
-    for(const p of particles){ p.x += mx*0.3; p.y += my*0.15; }
+    for(const p of particles){ p.x += mx*0.4; p.y += my*0.2; }
   },80);
 
   // Smooth scroll for nav

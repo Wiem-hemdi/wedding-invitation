@@ -11,6 +11,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div id="entryOverlay" class="entry-overlay">
+    <div class="entry-card animate-in" style="--d:0">
+      <p class="entry-basmala">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+      <p class="entry-names">Idriss <span>&amp;</span> Insaf</p>
+      <p class="entry-sub">Vous êtes cordialement invités</p>
+      <button type="button" id="openInvite" class="entry-btn pulse-cta">Ouvrir l'invitation ♪</button>
+    </div>
+  </div>
+
+  <audio id="bgMusic" loop preload="auto" aria-label="Musique de fond">
+    <source src="assets/audio/wedding-music.mp3" type="audio/mpeg">
+  </audio>
+
+  <button type="button" id="musicToggle" class="music-toggle" aria-label="Couper la musique" hidden>
+    <span class="music-on">♫</span>
+    <span class="music-off" hidden>🔇</span>
+  </button>
+
   <div class="app-shell">
   <canvas id="particles"></canvas>
 
@@ -18,14 +36,14 @@
       <div class="hero-bg" aria-hidden="true"></div>
       <div class="overlay"></div>
       <div class="hero-content">
-        <p class="basmala">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
-        <p class="invitation">Les familles <strong>Manai</strong> &amp; <strong>Bellar</strong> ont l'honneur de vous inviter à célébrer l'union de leurs enfants</p>
-        <h1 class="names">Idriss <span class="amp">&amp;</span> Insaf</h1>
-        <div class="hero-dates">
-          <p class="event-chip"><span class="chip-label">Henné</span> 19 Sept. — Sbikha</p>
-          <p class="event-chip"><span class="chip-label">Mariage</span> 20 Sept. — Kairouan</p>
+        <p class="basmala animate-in" style="--d:0">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+        <p class="invitation animate-in" style="--d:1">Les familles <strong>Manai</strong> &amp; <strong>Bellar</strong> ont l'honneur de vous inviter à célébrer l'union de leurs enfants</p>
+        <h1 class="names animate-in" style="--d:2">Idriss <span class="amp">&amp;</span> Insaf</h1>
+        <div class="hero-dates animate-in" style="--d:3">
+          <p class="event-chip float-anim"><span class="chip-label">Henné</span> 19 Sept. — Sbikha</p>
+          <p class="event-chip float-anim delay-1"><span class="chip-label">Mariage</span> 20 Sept. — Kairouan</p>
         </div>
-        <a class="cta" href="#rsvp">Confirmer ma présence</a>
+        <a class="cta animate-in pulse-cta" style="--d:4" href="#rsvp">Confirmer ma présence</a>
       </div>
     </header>
 
@@ -162,6 +180,7 @@
 
     <footer class="site-footer">
       <p>&copy; 2026 Idriss &amp; Insaf</p>
+      <p class="music-credit">Musique : Wedding Harp — Mixkit</p>
     </footer>
 
     <nav class="bottom-nav" aria-label="Navigation principale">
