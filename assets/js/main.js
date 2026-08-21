@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded',function(){
       _captcha: 'false',
       name: data.get('name'),
       email: data.get('email'),
+      event: data.get('event'),
       guests: data.get('guests'),
       message: data.get('message') || '(aucun message)'
     };
@@ -60,6 +61,8 @@ document.addEventListener('DOMContentLoaded',function(){
       if(!res.ok) throw new Error('Erreur serveur');
       form.reset();
       showRsvpMessage('Merci ! Votre confirmation a bien été envoyée.');
+      // celebratory confetti on successful RSVP
+      try{ spawnConfettiBurst(W/2, H/3, 48); }catch(e){}
     } catch {
       showRsvpMessage('Une erreur est survenue. Réessayez ou écrivez-nous directement par email.', true);
     } finally {
@@ -68,8 +71,25 @@ document.addEventListener('DOMContentLoaded',function(){
     }
   });
 
+  // Bottom nav — highlight active section
+  const navItems = document.querySelectorAll('.bottom-nav .nav-item');
+  const navSections = ['hero', 'events', 'gallery', 'rsvp', 'contact'];
+  const sectionEls = navSections.map(id => document.getElementById(id)).filter(Boolean);
+
+  function setActiveNav(id){
+    navItems.forEach(a => a.classList.toggle('active', a.dataset.nav === id));
+  }
+
+  const navObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(ent=>{
+      if(ent.isIntersecting) setActiveNav(ent.target.id);
+    });
+  }, { rootMargin: '-40% 0px -45% 0px', threshold: 0 });
+  sectionEls.forEach(s => navObserver.observe(s));
+  setActiveNav('hero');
+
   // Simple reveal on scroll
-  const reveals = document.querySelectorAll('.section, .gallery img, .story-photo');
+  const reveals = document.querySelectorAll('.section, .gallery img, .story-photo, .event-card');
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(ent=>{
       if(ent.isIntersecting) ent.target.classList.add('visible');
@@ -163,7 +183,7 @@ document.addEventListener('DOMContentLoaded',function(){
   },80);
 
   // Smooth scroll for nav
-  document.querySelectorAll('.main-nav a, .cta').forEach(a=>{
+  document.querySelectorAll('.bottom-nav a, .cta').forEach(a=>{
     a.addEventListener('click',function(e){
       if(this.hash && document.querySelector(this.hash)){
         e.preventDefault();
