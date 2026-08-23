@@ -12,6 +12,11 @@
 </head>
 <body>
   <div id="entryOverlay" class="entry-overlay">
+    <div class="overlay-header">
+      <p class="overlay-subtitle">Vous avez un message de</p>
+      <h1 class="overlay-title">Idriss <span>&amp;</span> Insaf</h1>
+    </div>
+
     <div class="envelope-wrapper">
       <div id="envelope" class="envelope">
         <div class="envelope-flap-top"></div>
@@ -44,6 +49,7 @@
         </div>
       </div>
     </div>
+    <p class="envelope-hint">Cliquez sur l'enveloppe pour ouvrir</p>
   </div>
 
   <audio id="bgMusic" loop preload="auto" aria-label="Musique de fond">
@@ -83,7 +89,7 @@
         <div class="container">
           <h2>Notre Histoire</h2>
           <figure class="story-photo">
-            <img src="assets/images/547917330_18366035626158053_2314096883542678175_n.jpg" alt="Idriss et Insaf" loading="lazy" />
+            <img src="assets/images/2.png" alt="Idriss et Insaf" loading="lazy" />
           </figure>
           <p class="lead">Deux destins qui se croisent, deux cœurs qui s'unissent. Idriss et Insaf vous invitent à partager ces moments uniques.</p>
           <div class="countdown" aria-live="polite">
@@ -239,23 +245,11 @@
       <section id="rsvp" class="section section-alt">
         <div class="container">
           <h2>RSVP</h2>
-          <p class="section-intro">Confirmez avant le 1<sup>er</sup> septembre 2026</p>
           <form id="rsvpForm" class="rsvp-form" name="rsvp" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="rsvp">
             <p class="visually-hidden"><label>Ne pas remplir<input name="bot-field" /></label></p>
             <label>Nom complet<input name="name" type="text" required placeholder="Votre nom" autocomplete="name"></label>
             <label>Email<input name="email" type="email" required placeholder="votre@email.com" autocomplete="email"></label>
-            <label>Présence<select name="event" required>
-              <option value="">Choisir…</option>
-              <option value="wedding">Mariage — 20 Sept. (Dynasty)</option>
-              <option value="absent">Ne pourra pas assister</option>
-            </select></label>
-            <label>Nombre de personnes<select name="guests" required>
-              <option value="1">1 personne</option>
-              <option value="2">2 personnes</option>
-              <option value="3">3 personnes</option>
-              <option value="4">4 personnes</option>
-            </select></label>
             <label>Message<textarea name="message" rows="3" placeholder="Un mot pour les mariés…"></textarea></label>
             <button type="submit">Envoyer</button>
           </form>
@@ -315,7 +309,6 @@
 
     <footer class="site-footer">
       <p>&copy; 2026 Idriss &amp; Insaf</p>
-      <p class="music-credit">Musique : Wedding Harp — Mixkit</p>
     </footer>
 
     <nav class="bottom-nav" aria-label="Navigation principale">

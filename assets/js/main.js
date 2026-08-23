@@ -259,20 +259,20 @@ document.addEventListener('DOMContentLoaded',function(){
     envelope.addEventListener('click', async function(e) {
       if (envelope.classList.contains('open')) return;
       
-      // Step 1: Open the flap
+      // Step 1: Open the flaps slowly (1.4s animation)
       envelope.classList.add('open');
       
-      // Step 2: Extract the card
+      // Step 2: Extract the card after flaps unfold
       setTimeout(() => {
         envelope.classList.add('extracted');
-      }, 550);
+      }, 1200);
       
       // Step 3: Turn/flip the card, fade out overlay, & start the music
       setTimeout(async () => {
         envelope.classList.add('turned');
         overlay.classList.add('is-closed');
         await startMusic();
-      }, 1450);
+      }, 2800);
       
       // Step 4: Finalize entrance & trigger welcoming confetti
       setTimeout(() => {
@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded',function(){
         setTimeout(() => {
           try { spawnConfettiBurst(W/2, H/4, 48); } catch(e) {}
         }, 150);
-      }, 2150);
+      }, 3800);
     });
   }
 
