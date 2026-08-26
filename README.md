@@ -1,6 +1,6 @@
 # Idriss & Insaf — Invitation mariage
 
-Site statique d'invitation pour le mariage d'Idriss Manai & Insaf Bellar (20 septembre 2026).
+Site statique d'invitation pour le mariage d'Idriss mannai & Insaf Bellar (20 septembre 2026).
 
 ## Structure
 
