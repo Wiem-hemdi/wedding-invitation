@@ -259,6 +259,9 @@ document.addEventListener('DOMContentLoaded',function(){
     envelope.addEventListener('click', async function(e) {
       if (envelope.classList.contains('open')) return;
       
+      // Start music immediately on first click
+      await startMusic();
+      
       // Step 1: Open the flaps slowly (1.4s animation)
       envelope.classList.add('open');
       
@@ -267,11 +270,10 @@ document.addEventListener('DOMContentLoaded',function(){
         envelope.classList.add('extracted');
       }, 1200);
       
-      // Step 3: Turn/flip the card, fade out overlay, & start the music
-      setTimeout(async () => {
+      // Step 3: Turn/flip the card & fade out overlay
+      setTimeout(() => {
         envelope.classList.add('turned');
         overlay.classList.add('is-closed');
-        await startMusic();
       }, 2800);
       
       // Step 4: Finalize entrance & trigger welcoming confetti
