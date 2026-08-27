@@ -383,7 +383,7 @@ document.addEventListener('DOMContentLoaded',function(){
       });
       if(!res.ok) throw new Error('Erreur serveur');
       form.reset();
-      showRsvpMessage('Merci ! Votre confirmation a bien été envoyée.');
+      showRsvpMessage('Merci ! firmation a bien été envoyée.');
       // celebratory confetti on successful RSVP
       try{ spawnConfettiBurst(W/2, H/3, 48); }catch(e){}
     } catch {
