@@ -362,13 +362,11 @@ document.addEventListener('DOMContentLoaded',function(){
     e.preventDefault();
     const data = new FormData(form);
     const payload = {
-      _subject: 'RSVP Mariage — Idriss & Insaf',
+      _subject: 'Message du Mariage — Idriss & Insaf',
       _template: 'table',
       _captcha: 'false',
       name: data.get('name'),
       email: data.get('email'),
-      event: data.get('event'),
-      guests: data.get('guests'),
       message: data.get('message') || '(aucun message)'
     };
 
@@ -383,7 +381,7 @@ document.addEventListener('DOMContentLoaded',function(){
       });
       if(!res.ok) throw new Error('Erreur serveur');
       form.reset();
-      showRsvpMessage('Merci ! firmation a bien été envoyée.');
+      showRsvpMessage('Merci ! Votre message a bien été envoyé.');
       // celebratory confetti on successful RSVP
       try{ spawnConfettiBurst(W/2, H/3, 48); }catch(e){}
     } catch {

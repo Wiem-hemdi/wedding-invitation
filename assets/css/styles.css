@@ -1302,17 +1302,24 @@ body:not(.invite-open) {
 }
 
 .rsvp-message {
-  margin-top: 14px;
-  padding: 12px 14px;
+  position: fixed;
+  z-index: 30;
+  top: 50%;
+  left: 50%;
+  width: min(420px, calc(100vw - 32px));
+  padding: 22px 24px;
   background: var(--sage-light);
-  border-left: 3px solid var(--sage);
-  border-radius: 0 10px 10px 0;
+  border: 1px solid var(--sage);
+  border-radius: 12px;
+  box-shadow: 0 0 0 100vmax rgb(22 29 24 / 42%), 0 18px 50px rgb(22 29 24 / 24%);
   font-size: var(--fs-sm);
+  text-align: center;
+  transform: translate(-50%, -50%);
 }
 
 .rsvp-message.rsvp-error {
   background: #fdf0ee;
-  border-left-color: #c45c4a;
+  border-color: #c45c4a;
 }
 
 /* Contact block */
@@ -1546,13 +1553,13 @@ body:not(.invite-open) {
   40% { transform: translateY(-4px); }
 }
 
-@keyframes slideUpMsg {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: none; }
+@keyframes popupIn {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.94); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
 .rsvp-message:not([hidden]) {
-  animation: slideUpMsg 0.45s ease;
+  animation: popupIn 0.3s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
