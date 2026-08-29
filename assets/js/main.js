@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded',function(){
   setInterval(updateCountdown, 1000);
 
   // RSVP form — envoi par email via FormSubmit
-  const RSVP_EMAIL = 'wiem.hemdi@polytechnicien.tn';
+  const RSVP_EMAIL = 'Idrissmanai2020@gmail.com,insafbellar1@gmail.com';
   const form = document.getElementById('rsvpForm');
   const msg = document.getElementById('rsvpMsg');
   const submitBtn = form.querySelector('button[type="submit"]');
@@ -362,12 +362,12 @@ document.addEventListener('DOMContentLoaded',function(){
     e.preventDefault();
     const data = new FormData(form);
     const payload = {
-      _subject: 'Message du Mariage — Idriss & Insaf',
-      _template: 'table',
+      _subject: 'Message',
+      _template: 'default',
       _captcha: 'false',
-      name: data.get('name'),
-      email: data.get('email'),
-      message: data.get('message') || '(aucun message)'
+      'Nom de votre ami': data.get('name'),
+      'Son adresse email': data.get('email'),
+      'Son message de célébration': data.get('message') || '(aucun message)'
     };
 
     submitBtn.disabled = true;

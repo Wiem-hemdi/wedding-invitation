@@ -59,7 +59,7 @@ Netlify vous donne une URL du type `https://random-name.netlify.app`. Vous pourr
 
 1. Ouvrez le site en ligne (pas en fichier local)
 2. Envoyez un test depuis le formulaire RSVP
-3. Si vous utilisez **FormSubmit** (comportement AJAX actuel) : vérifiez la boîte **wiem.hemdi@polytechnicien.tn** — un email FormSubmit demandera l'activation (une seule fois). Cliquez le lien de confirmation.
+3. Si vous utilisez **FormSubmit** (comportement AJAX actuel) : vérifiez les boîtes **Idrissmanai2020@gmail.com** et **insafbellar1@gmail.com** — un email FormSubmit demandera l'activation (une seule fois). Cliquez le lien de confirmation.
 4. Si vous préférez que **Netlify Forms** récupère les réponses : Netlify capture les envois HTML classiques. Dans ce cas, désactivez l'envoi AJAX dans `assets/js/main.js` (supprimez ou commentez l'écouteur `submit`) et laissez le formulaire envoyer normalement — Netlify enregistrera automatiquement les soumissions.
 
 ## Mettre à jour le site après hébergement
